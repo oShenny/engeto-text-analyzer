@@ -33,9 +33,9 @@ TEXTS = [
     in modern oceans. Other fish such as paddlefish,
     garpike and stingray are also present.""",
 ]
-line = 60 * "-"
+separator = 60 * "-"
 
-# ? LOGIN ----------------------------------------------------------------------------------
+# ? LOGIN
 
 # * verified users who are able to use the program.
 verified_users = {
@@ -50,28 +50,32 @@ entered_password = input("password: ")
 
 # * Condition verifying if user-entered credentials match our verified users.
 if entered_user in verified_users:
+
     if verified_users[entered_user] == entered_password:
-        print(line)
+        print(separator)
         print(f"Welcome to the app, {entered_user.capitalize()}!")
         print("This app analyzes three paragraphs and shows text statistics.")
-        print(line)
+        print(separator)
+
     else:
         print(f"Your password is incorrect. Program terminating...")
         exit()
+
 else:
     print(f"User is not registered. Program terminating...")
     exit()
 
-# ? SELECTING PARAGRAPH --------------------------------------------------------------------
+# ? SELECTING PARAGRAPH
 
 selected_paragraph = input("Enter a number (1-3) to select a paragraph: ")
 
 # * Condition verifying if the user-entered number is within the range of 1 to 3 to select a paragraph for analysis.
 if selected_paragraph.isdigit():
-    sp_int = int(selected_paragraph) - 1
+    selected_paragraph_as_number = int(selected_paragraph) - 1
 
-    if sp_int in range(0, 3):
+    if selected_paragraph_as_number in range(0, 3):
         pass
+
     else:
         print(
             "You've selected a number outside the valid range. Program terminating..."
@@ -82,7 +86,7 @@ else:
     print("The entered value must be a number. Program terminating...")
     exit()
 
-# ? ANALYSIS ------------------------------------------------------------------------------
+# ? ANALYSIS
 
 # * Defining statistics as a dictionary to be used in future work.
 statistics = {
@@ -94,7 +98,7 @@ statistics = {
     "sum_of_numbers": 0,
 }
 
-paragraph = TEXTS[sp_int].split()
+paragraph = TEXTS[selected_paragraph_as_number].split()
 
 statistics["words"] = len(paragraph)
 
@@ -115,17 +119,17 @@ for word in paragraph:
         statistics["sum_of_numbers"] = statistics["sum_of_numbers"] + int(word)
 
 print(
-    f"""{line}
+    f"""{separator}
 The text contains {statistics["words"]} total words.
 It includes {statistics['titlecase_words']} words in title case.
 It contains {statistics['uppercase_words']} words in uppercase.
 It has {statistics['lowercase_words']} words in lowercase.
 It includes {statistics['numeric_strings']} numeric strings.
 The total sum of all numbers is {statistics['sum_of_numbers']}.
-{line}"""
+{separator}"""
 )
 
-# ? DIAGRAM ------------------------------------------------------------------------------
+# ? DIAGRAM
 
 diagram = {}
 
@@ -140,7 +144,7 @@ for word in paragraph:
         diagram[length] = 1
 
 print(f"LEN| {"OCCURRENCES".center(40)}  |NR.")
-print(line)
+print(separator)
 
 # * Prints the diagram in order, using asterisks (*) to represent the count for each number.
 for num in sorted(diagram):
