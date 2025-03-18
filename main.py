@@ -98,12 +98,12 @@ statistics = {
     "sum_of_numbers": 0,
 }
 
-paragraph = TEXTS[selected_paragraph_as_number].split()
+words_in_paragraph = TEXTS[selected_paragraph_as_number].split()
 
-statistics["words"] = len(paragraph)
+statistics["words"] = len(words_in_paragraph)
 
 # * For loop that calculates 4 key statistical measures.
-for word in paragraph:
+for word in words_in_paragraph:
 
     if word.istitle():
         statistics["titlecase_words"] = statistics["titlecase_words"] + 1
@@ -134,7 +134,7 @@ The total sum of all numbers is {statistics['sum_of_numbers']}.
 diagram = {}
 
 # * Creating a diagram storing the length of each word in the paragraph.
-for word in paragraph:
+for word in words_in_paragraph:
     length = len(word.strip(",."))
 
     if length in diagram:
